@@ -149,39 +149,6 @@ El `SimpleMessageListenerContainer` está escuchando constantemente la cola `que
 [Receiver] ha recibido el mensaje "Hello world!"
 ```
 
-### 6.4. Diagrama del flujo
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Spring Boot Application                   │
-│                                                              │
-│  ┌──────────────────────┐          ┌──────────────────────┐  │
-│  │  TutorialRabbitmq    │          │      Receiver        │  │
-│  │  SpringApplication   │          │  receiveMessage()    │  │
-│  │                      │          │                      │  │
-│  │  rabbitTemplate      │          │  [Receiver] ha       │  │
-│  │  .convertAndSend()   │          │  recibido el mensaje │  │
-│  └──────────┬───────────┘          └──────────▲───────────┘  │
-│             │                                 │               │
-└─────────────┼─────────────────────────────────┼───────────────┘
-              │                                 │
-              ▼                                 │
-┌─────────────────────────────────────────────┐│
-│              RabbitMQ Broker                ││
-│                                             ││
-│  ┌─────────────┐    routing_key    ┌──────┐ ││
-│  │  exchange   │ ─────────────────▶│queue │ ││
-│  │ exchange_   │                   │queue_│ ││
-│  │ name        │                   │name  │ ││
-│  └─────────────┘                   └──────┘ ││
-└─────────────────────────────────────────────┘│
-                                               │
-              ┌────────────────────────────────┘
-              │  SimpleMessageListenerContainer
-              │  + MessageListenerAdapter
-              └────────────────────────────────
-```
-
 ---
 
 ## 7. Resumen
